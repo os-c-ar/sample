@@ -1,0 +1,222 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dampener Selector</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css\PD_style.css"> 
+</head>
+<body>
+
+    <div class= "container-1">
+    
+        <div class="flex-box-container-1">
+            
+            <h3 >    
+            <img id="logo-opt-ppal" src="images/logo-opt-ppal.png" height=50  alt=""> 
+            Selector de Amortiguador de Pulsaciones
+            </h3>
+    
+        </div>
+    </div>
+
+
+    <div class= "container-2">
+        <div class="flex-box-container-2">
+            <div id="informacion" class="flex-box-informacion">  
+
+                <h7>Ingrese la Siguiente Información:</h7><br><br>
+                        <!--- 
+                <label for="caudal">Caudal (GPH):</label>
+                <input type="number" id="caudal" name="caudal" ><br>
+                    -->
+                <label>
+                    Caudal (gph):<input type="number" id="caudal" name="caudal" value="20" required="">  
+                </label>       
+                            
+                <label for="SPM">
+                    Strokes por minuto: <input type="number" id="SPM" name="SPM" value="20" required="">
+                </label> 
+
+                <label for="SystemPressure">
+                    Presión (psi): <input type="number" name="SystemPressure" id="SystemPressure" value="100" required="">
+                </label>
+            
+                <label>
+                    Desired Dampening (%):    <input type="number" name="txtDesiredDampening" id="txtDesiredDampening" value="90" required="">
+                </label>
+                
+                <label> K Factor (Tipo de bomba):
+                    <select name="cmbKFactor" id="cmbKFactor">
+                        <option value="0.60">Simplex - Single Acting  = .60</option>
+                        <option value="0.25">Simplex - Double Acting =  .25</option>
+                        <option value="0.25">Duplex - Single Acting  = .25</option>
+                        <option value="0.15">Duplex - Double Acting = .15</option>
+                        <option value="0.13">Triplex - Single Acting  = .13</option>
+                        <option value="0.06">Triplex - Double Acting = .06</option>
+                        <option value="0.10">Quaduplex - Single Acting  = .10</option>
+                        <option value="0.06">Quadruplex - Double Acting = .06</option>
+                        <option value="0.06">Quintiplex - Single Acting  = .06</option>
+                        <option value="0.02">Quintiplex - Double Acting = .02</option>
+                    </select>
+                </label>
+                
+                        
+                <label>Type of Gas 
+                    <select name="cmbAir" id="cmbAir">
+                        <option value="1">Air</option>
+                        <option value="0.714">Nitrogen</option>
+                    </select>
+                </label>
+                
+
+                <button  class="btn btn-primary"   id="buttonCalculate" onclick="PD_Calculator()"> Calcular</button>
+
+               
+
+            </div> <!--Cierre Div Info-->
+
+            <div id="resultadosDimensionamiento" class="flex-box-resultados">  
+                <h7>Resultados:</h7><br><br>
+
+                <form >
+                    <fieldset>
+                      <legend>Resultados Dimensionamiento</legend>
+
+                        <label> 
+                          Volumen por Stroke (in3): &nbsp&nbsp&nbsp&nbsp  <h7 id="VperStroke" value="0"> 0</h7>
+                        </label>
+
+                        <label> 
+                            Tamaño Requerido (in3): &nbsp&nbsp&nbsp&nbsp  <h7 id="dampenerSizeR" value="0"> 0</h7>
+                        </label>
+
+                        <label> 
+                            Tamaño Seleccionado (in3): &nbsp&nbsp&nbsp&nbsp  <h7 id="dampenerSizeS" value="0"> 0</h7>
+                        </label>
+                      
+                    </fieldset>
+
+                    <label>Housing Material 
+                        <select name="housingMaterialPD" id="housingMaterialPD">
+                            <option value="CP">CPVC</option>
+                            <option value="K">PVDF</option>
+                            <option value="N">Noril</option>
+                            <option value="P">PVC</option>
+                            <option value="PP">GF Polypro</option>
+                            <option value="S">316 SS</option>
+                        </select>
+                    </label>
+
+                    <label>Diaphragm Material
+                        <select name="diaphragmMaterialPD" id="diaphragmMaterialPD">
+                            <option value="E">EPDM</option>
+                            <option value="H">Hypalon</option>
+                            <option value="V">Viton</option>
+                        </select>
+                    </label>
+
+                    <label>Charging Assembly
+                        <select name="chargingAssemblyPD" id="chargingAssemblyPD">
+                            <option value="0">Brass Tee & Economy Gauge</option>
+                            <option value="1">Brass Tee & Mid Range Gauge</option>
+                            <option value="2">Brass Tee & Premium Gauge</option>
+                            <option value="3">316SS Tee & Economy Gauge</option>
+                            <option value="4">316SS Tee & Mid Range Gauge</option>
+                            <option value="5">316SS Tee & Premium Gauge</option>
+                            <option value="6">Brass Tee & Compound Gauge</option>
+                            <option value="7">316SS Tee & Compound Gauge</option>
+                        </select>
+                    </label>
+
+                    <label>Pressure Options
+                        <select name="pressureOptionsPD" id="pressureOptionsPD">
+                            <option value="1">160 psi</option>
+                            <option value="2"> 60 psi</option>
+                            <option value="3">100 psi</option>
+                            <option value="4">200 psi</option>
+                            <option value="5">300 psi</option>                          
+                        </select>
+                    </label>
+
+                    <label>Other Options
+                        <select name="otherOptionsPD" id="otherOptionsPD">
+                            <option value="">Conección FNPT, NO opciones adicionales</option>
+                            <option value="B">BSPT connection</option>
+                            <option value="F"> Flanged conection</option>
+                            <option value="R">Rubber Boot for Gauge</option>
+                            <option value="S">Socket Connection</option>
+                            <option value="U">Union Connection</option>
+                            <option value="UD">Metric Unit Connection</option>
+                            <option value="UZ">Threaded Union Connection</option>
+                            <option value="M">Back Mount Gauge</option>
+                            <option value="M8">Back Mount 1/8 in gauge</option>   
+                        </select>
+                    </label>
+
+
+
+
+
+
+
+                </form>
+
+
+
+            </div> <!--Cierre de div resultados dimensionamiento-->
+        </div> <!--Cierre flex-box-comtainer 2  que contiene Info y resultados-->
+    </div> <!--Cierre comtainer 2  que contiene flex box container 1 y 2Info y resultados-->
+
+
+    <div class= "container-3">
+        <table class= "tableResults">
+            <th>Descripción</th>
+            <th>Modelo</th>
+            <th>Precio de lista</th>
+            <th>Moneda</th>
+            <th>Desc</th>
+            <th>Qty</th>
+            <th>und</th>
+            <th>V. Unit</th>
+            <th>V. Parcial</th>
+            <th> W. Unit (kg)</th>
+            <th>W. Parcial (kg)</th>
+
+            <tr>
+            <td id="tdDescription">0</td>
+            <td id= "tdModel" >0</td>
+            <td id= "tdPriceL">0</td>
+            <td id= "tdMoneda">USD</td>
+            <td id= "tdDiscount" >0.55</td>
+            <td id= "tdQty" >1</td>
+            <td id= "tdUnidades" >und</td>
+            <td id= "tdUnitaryPrice" >0</td>
+            <td id= "tdParcialPrice" >0</td>
+            <td id= "tdUnitaryWeight" >0</td>
+            <td id= "tdParcialWeight" >0</td>
+            </tr>
+
+
+        </table>
+
+    </div>
+
+    <div class= "container-4" id="resultadoImagen">
+    </div>
+
+    <div class= "container-5" id="resultadoLinks">
+
+        <a href="Documents/Griffco_Pulsation_Dampner.pdf" font> Datasheet </a> <br>
+        <a href="Documents/Griffco_Pulsation_Dampener_Spanish.pdf"> Datasheet en Español </a><br>
+        <a href="Documents/Griffco Valve Price List -2017-03.pdf"> Listado de Precios 2017 </a>
+
+
+    </div>
+  
+  
+
+    
+    <script src= "js\PD_selector.js"> </script>
+</body>
+</html>
